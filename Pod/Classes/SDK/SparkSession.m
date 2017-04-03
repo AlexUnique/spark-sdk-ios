@@ -8,8 +8,8 @@
 
 #import "SparkSession.h"
 #import "KeychainItemWrapper.h"
-#import <AFNetworking/AFHTTPSessionManager.h>
 #import "SparkCloud.h"
+#import "LXRURLSessionManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

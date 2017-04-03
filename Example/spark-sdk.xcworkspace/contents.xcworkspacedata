@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:ParticleSDK/ParticleSDK.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Spark-SDK.xcodeproj">
    </FileRef>
    <FileRef

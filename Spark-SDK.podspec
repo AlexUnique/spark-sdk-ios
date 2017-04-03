@@ -25,10 +25,14 @@ Pod::Spec.new do |s|
         ss.ios.frameworks = 'SystemConfiguration', 'Security'
     end
 
+    s.subspec 'HTTP' do |ss|
+        ss.source_files = 'Pod/Classes/HTTP/*.{h,m}'
+    end
+
     s.subspec 'SDK' do |ss|
         ss.source_files = 'Pod/Classes/SDK/Spark*.{h,m}'
-        ss.dependency 'AFNetworking', '~> 3.0'
         ss.dependency 'Spark-SDK/Helpers'
+        ss.dependency 'Spark-SDK/HTTP'
     end
 
     # s.frameworks = 'SystemConfiguration', 'Security'

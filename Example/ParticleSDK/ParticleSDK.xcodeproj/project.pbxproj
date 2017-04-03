@@ -10,7 +10,6 @@
 		5014ED5E1CB73A2400A1063E /* SparkEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F650A11C8542B30065F02F /* SparkEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5038C5AD1CA220C50084D255 /* SparkSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5038C5AB1CA220C50084D255 /* SparkSession.m */; };
 		5038C5AE1CA220C50084D255 /* SparkSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 5038C5AC1CA220C50084D255 /* SparkSession.h */; };
-		509749BE1D42E2D700C5DF0B /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509749BD1D42E2D700C5DF0B /* AFNetworking.framework */; };
 		50F6507F1C85423D0065F02F /* ParticleSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F6507E1C85423D0065F02F /* ParticleSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50F650861C85423D0065F02F /* ParticleSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50F6507B1C85423D0065F02F /* ParticleSDK.framework */; };
 		50F6508B1C85423D0065F02F /* ParticleSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F6508A1C85423D0065F02F /* ParticleSDKTests.m */; };
@@ -23,6 +22,14 @@
 		50F650AF1C8542B30065F02F /* SparkDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 50F6509F1C8542B30065F02F /* SparkDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50F650B01C8542B30065F02F /* SparkDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F650A01C8542B30065F02F /* SparkDevice.m */; };
 		50F650B21C8542B30065F02F /* SparkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 50F650A21C8542B30065F02F /* SparkEvent.m */; };
+		FA00FA5F1E9197D900BA14A0 /* LXRRequestSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = FA00FA571E9197D900BA14A0 /* LXRRequestSerializer.h */; };
+		FA00FA601E9197D900BA14A0 /* LXRRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA00FA581E9197D900BA14A0 /* LXRRequestSerializer.m */; };
+		FA00FA611E9197D900BA14A0 /* LXRResponseSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = FA00FA591E9197D900BA14A0 /* LXRResponseSerializer.h */; };
+		FA00FA621E9197D900BA14A0 /* LXRResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA00FA5A1E9197D900BA14A0 /* LXRResponseSerializer.m */; };
+		FA00FA631E9197D900BA14A0 /* LXRURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FA00FA5B1E9197D900BA14A0 /* LXRURLSessionManager.h */; };
+		FA00FA641E9197D900BA14A0 /* LXRURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA00FA5C1E9197D900BA14A0 /* LXRURLSessionManager.m */; };
+		FA00FA651E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.h in Headers */ = {isa = PBXBuildFile; fileRef = FA00FA5D1E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.h */; };
+		FA00FA661E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.m in Sources */ = {isa = PBXBuildFile; fileRef = FA00FA5E1E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +45,6 @@
 /* Begin PBXFileReference section */
 		5038C5AB1CA220C50084D255 /* SparkSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkSession.m; sourceTree = "<group>"; };
 		5038C5AC1CA220C50084D255 /* SparkSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparkSession.h; sourceTree = "<group>"; };
-		509749BD1D42E2D700C5DF0B /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AFNetworking.framework; sourceTree = "<group>"; };
 		50F6507B1C85423D0065F02F /* ParticleSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ParticleSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F6507E1C85423D0065F02F /* ParticleSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParticleSDK.h; sourceTree = "<group>"; };
 		50F650801C85423D0065F02F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +61,14 @@
 		50F650A01C8542B30065F02F /* SparkDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkDevice.m; sourceTree = "<group>"; };
 		50F650A11C8542B30065F02F /* SparkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SparkEvent.h; sourceTree = "<group>"; };
 		50F650A21C8542B30065F02F /* SparkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SparkEvent.m; sourceTree = "<group>"; };
+		FA00FA571E9197D900BA14A0 /* LXRRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXRRequestSerializer.h; sourceTree = "<group>"; };
+		FA00FA581E9197D900BA14A0 /* LXRRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXRRequestSerializer.m; sourceTree = "<group>"; };
+		FA00FA591E9197D900BA14A0 /* LXRResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXRResponseSerializer.h; sourceTree = "<group>"; };
+		FA00FA5A1E9197D900BA14A0 /* LXRResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXRResponseSerializer.m; sourceTree = "<group>"; };
+		FA00FA5B1E9197D900BA14A0 /* LXRURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXRURLSessionManager.h; sourceTree = "<group>"; };
+		FA00FA5C1E9197D900BA14A0 /* LXRURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXRURLSessionManager.m; sourceTree = "<group>"; };
+		FA00FA5D1E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+LXRFormURLEncodedBody.h"; sourceTree = "<group>"; };
+		FA00FA5E1E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+LXRFormURLEncodedBody.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				509749BE1D42E2D700C5DF0B /* AFNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +93,6 @@
 		50F650711C85423D0065F02F = {
 			isa = PBXGroup;
 			children = (
-				509749BD1D42E2D700C5DF0B /* AFNetworking.framework */,
 				50F6507D1C85423D0065F02F /* ParticleSDK */,
 				50F650891C85423D0065F02F /* ParticleSDKTests */,
 				50F6507C1C85423D0065F02F /* Products */,
@@ -99,6 +111,7 @@
 		50F6507D1C85423D0065F02F /* ParticleSDK */ = {
 			isa = PBXGroup;
 			children = (
+				FA00FA561E9197D900BA14A0 /* HTTP */,
 				50F6509A1C8542B30065F02F /* Helpers */,
 				50F650A51C8542B30065F02F /* SDK */,
 				50F6507E1C85423D0065F02F /* ParticleSDK.h */,
@@ -144,6 +157,21 @@
 			path = ../../Pod/Classes/SDK;
 			sourceTree = SOURCE_ROOT;
 		};
+		FA00FA561E9197D900BA14A0 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				FA00FA571E9197D900BA14A0 /* LXRRequestSerializer.h */,
+				FA00FA581E9197D900BA14A0 /* LXRRequestSerializer.m */,
+				FA00FA591E9197D900BA14A0 /* LXRResponseSerializer.h */,
+				FA00FA5A1E9197D900BA14A0 /* LXRResponseSerializer.m */,
+				FA00FA5B1E9197D900BA14A0 /* LXRURLSessionManager.h */,
+				FA00FA5C1E9197D900BA14A0 /* LXRURLSessionManager.m */,
+				FA00FA5D1E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.h */,
+				FA00FA5E1E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.m */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -151,11 +179,15 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA00FA631E9197D900BA14A0 /* LXRURLSessionManager.h in Headers */,
 				50F6507F1C85423D0065F02F /* ParticleSDK.h in Headers */,
+				FA00FA611E9197D900BA14A0 /* LXRResponseSerializer.h in Headers */,
 				5014ED5E1CB73A2400A1063E /* SparkEvent.h in Headers */,
 				50F650A71C8542B30065F02F /* EventSource.h in Headers */,
 				50F650AD1C8542B30065F02F /* SparkCloud.h in Headers */,
 				5038C5AE1CA220C50084D255 /* SparkSession.h in Headers */,
+				FA00FA5F1E9197D900BA14A0 /* LXRRequestSerializer.h in Headers */,
+				FA00FA651E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.h in Headers */,
 				50F650AF1C8542B30065F02F /* SparkDevice.h in Headers */,
 				50F650A91C8542B30065F02F /* KeychainItemWrapper.h in Headers */,
 			);
@@ -260,9 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5038C5AD1CA220C50084D255 /* SparkSession.m in Sources */,
+				FA00FA621E9197D900BA14A0 /* LXRResponseSerializer.m in Sources */,
+				FA00FA601E9197D900BA14A0 /* LXRRequestSerializer.m in Sources */,
+				FA00FA641E9197D900BA14A0 /* LXRURLSessionManager.m in Sources */,
 				50F650B21C8542B30065F02F /* SparkEvent.m in Sources */,
 				50F650B01C8542B30065F02F /* SparkDevice.m in Sources */,
 				50F650AA1C8542B30065F02F /* KeychainItemWrapper.m in Sources */,
+				FA00FA661E9197D900BA14A0 /* NSMutableURLRequest+LXRFormURLEncodedBody.m in Sources */,
 				50F650A81C8542B30065F02F /* EventSource.m in Sources */,
 				50F650AE1C8542B30065F02F /* SparkCloud.m in Sources */,
 			);

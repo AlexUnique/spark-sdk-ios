@@ -1,29 +1,15 @@
 PODS:
-  - AFNetworking (3.0.4):
-    - AFNetworking/NSURLSession (= 3.0.4)
-    - AFNetworking/Reachability (= 3.0.4)
-    - AFNetworking/Security (= 3.0.4)
-    - AFNetworking/Serialization (= 3.0.4)
-    - AFNetworking/UIKit (= 3.0.4)
-  - AFNetworking/NSURLSession (3.0.4):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.0.4)
-  - AFNetworking/Security (3.0.4)
-  - AFNetworking/Serialization (3.0.4)
-  - AFNetworking/UIKit (3.0.4):
-    - AFNetworking/NSURLSession
-  - Spark-SDK (0.3.4):
-    - Spark-SDK/Helpers (= 0.3.4)
-    - Spark-SDK/SDK (= 0.3.4)
-  - Spark-SDK/Helpers (0.3.4)
-  - Spark-SDK/SDK (0.3.4):
-    - AFNetworking (~> 3.0)
+  - Spark-SDK (0.6.0):
+    - Spark-SDK/Helpers (= 0.6.0)
+    - Spark-SDK/HTTP (= 0.6.0)
+    - Spark-SDK/SDK (= 0.6.0)
+  - Spark-SDK/Helpers (0.6.0)
+  - Spark-SDK/HTTP (0.6.0)
+  - Spark-SDK/SDK (0.6.0):
     - Spark-SDK/Helpers
+    - Spark-SDK/HTTP
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.0)
   - Spark-SDK (from `../`)
 
 EXTERNAL SOURCES:
@@ -31,7 +17,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  Spark-SDK: e47610e4579abb9cb492f4b1cab734b656cf8bad
+  Spark-SDK: 8333b4e317c556afe87db9d3c7ad0f8c74a45262
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 34f56e2d713348e0b1bda4d6d65ea67fe0dcd96f
+
+COCOAPODS: 1.2.0

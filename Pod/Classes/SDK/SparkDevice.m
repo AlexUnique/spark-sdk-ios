@@ -9,8 +9,8 @@
 #import "SparkDevice.h"
 #import "SparkCloud.h"
 #import "SparkEvent.h"
-#import <AFNetworking/AFNetworking.h>
 #import <objc/runtime.h>
+#import "LXRURLSessionManager.h"
 
 #define MAX_SPARK_FUNCTION_ARG_LENGTH 63
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSString *version;
 //@property (nonatomic) SparkDeviceType type;
 @property (nonatomic) BOOL requiresUpdate;
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
+@property (nonatomic, strong) LXRURLSessionManager *manager;
 @property (nonatomic) BOOL isFlashing;
 @property (nonatomic, strong) NSURL *baseURL;
 
@@ -157,8 +157,7 @@ NS_ASSUME_NONNULL_BEGIN
             _requiresUpdate = YES;
         }
         
-        self.manager = [[AFHTTPSessionManager alloc] initWithBaseURL:self.baseURL];
-        self.manager.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.manager = [[LXRURLSessionManager alloc] initWithBaseURL:self.baseURL];
 
         if (!self.manager) return nil;
         
@@ -230,7 +229,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     [self setAuthHeaderWithAccessToken];
     
-    NSURLSessionDataTask *task = [self.manager GET:[url description] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager GET:[url description] success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         if (completion)
         {
@@ -287,7 +286,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     [self setAuthHeaderWithAccessToken];
     
-    NSURLSessionDataTask *task = [self.manager POST:[url description] parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+  NSURLSessionDataTask *task = [self.manager POST:[url description] parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         if (completion)
         {
@@ -456,7 +455,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"app"] = knownAppName;
     [self setAuthHeaderWithAccessToken];
-    
+  
     NSURLSessionDataTask *task = [self.manager PUT:[url description] parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         NSDictionary *responseDict = responseObject;
@@ -487,61 +486,63 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(nullable NSURLSessionDataTask *)flashFiles:(NSDictionary *)filesDict completion:(nullable SparkCompletionBlock)completion // binary
 {
-    NSURL *url = [self.baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"v1/devices/%@", self.id]];
-    
-    [self setAuthHeaderWithAccessToken];
-    
-    NSError *reqError;
-    NSMutableURLRequest *request = [self.manager.requestSerializer multipartFormRequestWithMethod:@"PUT" URLString:url.description parameters:@{@"file_type" : @"binary"} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        // check this:
-        for (NSString *key in filesDict.allKeys)
-        {
-            [formData appendPartWithFileData:filesDict[key] name:@"file" fileName:key mimeType:@"application/octet-stream"];
-        }
-    } error:&reqError];
-    
-    if (!reqError)
-    {
-        NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)
-        {
-            if (error == nil)
-            {
-                NSDictionary *responseDict = responseObject;
-    //            NSLog(@"flashFiles: %@",responseDict.description);
-                if (responseDict[@"error"])
-                {
-                    if (completion)
-                    {
-                        completion([self makeErrorWithDescription:responseDict[@"error"] code:1004]);
-                    }
-                }
-                else if (completion)
-                {
-                    completion(nil);
-                }
-            }
-            else
-            {
-                // TODO: better erroring handlin
-                if (completion)
-                {
-                    completion(error);
-                }
-            }
-        }];
-        
-        [task resume];
-        return task;
-    }
-    else
-    {
-        if (completion)
-        {
-            completion(reqError);
-        }
-
-        return nil;
-    }
+//    NSURL *url = [self.baseURL URLByAppendingPathComponent:[NSString stringWithFormat:@"v1/devices/%@", self.id]];
+//    
+//    [self setAuthHeaderWithAccessToken];
+//    
+//    NSError *reqError;
+//    NSMutableURLRequest *request = [self.manager.requestSerializer multipartFormRequestWithMethod:@"PUT" URLString:url.description parameters:@{@"file_type" : @"binary"} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        // check this:
+//        for (NSString *key in filesDict.allKeys)
+//        {
+//            [formData appendPartWithFileData:filesDict[key] name:@"file" fileName:key mimeType:@"application/octet-stream"];
+//        }
+//    } error:&reqError];
+//    
+//    if (!reqError)
+//    {
+//        NSURLSessionDataTask *task = [self.manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error)
+//        {
+//            if (error == nil)
+//            {
+//                NSDictionary *responseDict = responseObject;
+//    //            NSLog(@"flashFiles: %@",responseDict.description);
+//                if (responseDict[@"error"])
+//                {
+//                    if (completion)
+//                    {
+//                        completion([self makeErrorWithDescription:responseDict[@"error"] code:1004]);
+//                    }
+//                }
+//                else if (completion)
+//                {
+//                    completion(nil);
+//                }
+//            }
+//            else
+//            {
+//                // TODO: better erroring handlin
+//                if (completion)
+//                {
+//                    completion(error);
+//                }
+//            }
+//        }];
+//        
+//        [task resume];
+//        return task;
+//    }
+//    else
+//    {
+//        if (completion)
+//        {
+//            completion(reqError);
+//        }
+//
+//        return nil;
+//    }
+  
+  return nil;
 }
 
 
@@ -573,7 +574,7 @@ NS_ASSUME_NONNULL_BEGIN
     
     [self setAuthHeaderWithAccessToken];
     
-    NSURLSessionDataTask *task = [self.manager GET:[url description] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager GET:[url description] success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                   {
                                       if (completion)
                                       {

@@ -10,9 +10,11 @@
 #import "KeychainItemWrapper.h"
 #import "SparkSession.h"
 //#import "SparkUser.h"
-#import <AFNetworking/AFNetworking.h>
 #import <EventSource.h>
 #import "SparkEvent.h"
+#import "LXRURLSessionManager.h"
+
+static NSString *AFNetworkingOperationFailingURLResponseDataErrorKey = @"AFNetworkingOperationFailingURLResponseDataErrorKey";
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,7 +33,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
 @property (nonatomic, strong, nonnull) NSURL* baseURL;
 @property (nonatomic, strong, nullable) SparkSession* session;
 //@property (nonatomic, strong, nullable) SparkUser* user;
-@property (nonatomic, strong, nonnull) AFHTTPSessionManager *manager;
+@property (nonatomic, strong, nonnull) LXRURLSessionManager *manager;
 
 @property (nonatomic, strong, nonnull) NSMutableDictionary *eventListenersDict;
 
@@ -81,9 +83,9 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
         }
         
         // Init HTTP manager
-        self.manager = [[AFHTTPSessionManager alloc] initWithBaseURL:self.baseURL];
-        self.manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        [self.manager.requestSerializer setTimeoutInterval:GLOBAL_API_TIMEOUT_INTERVAL];
+        self.manager = [[LXRURLSessionManager alloc] initWithBaseURL:self.baseURL];
+//        self.manager.responseSerializer = [ResponseSerializer serializer];
+//        [self.manager.requestSerializer setTimeoutInterval:GLOBAL_API_TIMEOUT_INTERVAL];
         if (!self.manager)
         {
             return nil;
@@ -197,7 +199,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     
     [self.manager.requestSerializer setAuthorizationHeaderFieldWithUsername:self.oAuthClientId password:self.oAuthClientSecret];
     // OAuth login
-    [self.manager POST:@"oauth/token" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.manager POST:@"oauth/token" parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSMutableDictionary *responseDict = [responseObject mutableCopy];
         
@@ -239,7 +241,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     
     [self.manager.requestSerializer setAuthorizationHeaderFieldWithUsername:self.oAuthClientId password:self.oAuthClientSecret];
     // OAuth login
-    NSURLSessionDataTask *task = [self.manager POST:@"oauth/token" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSURLSessionDataTask *task = [self.manager POST:@"oauth/token" parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSMutableDictionary *responseDict = [responseObject mutableCopy];
 
@@ -292,7 +294,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
         params[@"account_info"] = accountInfo;
     }
         
-    NSURLSessionDataTask *task = [self.manager POST:@"/v1/users/" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:@"/v1/users/" parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                   {
                                       NSDictionary *responseDict = responseObject;
                                       if (completion) {
@@ -378,7 +380,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     NSString *url = [NSString stringWithFormat:@"/v1/products/%tu/customers", productId];
     //    NSLog(@"Signing up customer...");
     
-    NSURLSessionDataTask *task = [self.manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                   {
                                       NSHTTPURLResponse *serverResponse = (NSHTTPURLResponse *)task.response;
                                       NSMutableDictionary *responseDict = [responseObject mutableCopy];
@@ -450,7 +452,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     NSMutableDictionary *params = [NSMutableDictionary new]; //[self defaultParams];
     params[@"id"] = deviceID;
     
-    NSURLSessionDataTask *task = [self.manager POST:@"/v1/devices" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:@"/v1/devices" parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         if (completion)
         {
@@ -494,7 +496,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
 
     NSString *urlPath = [NSString stringWithFormat:@"/v1/devices/%@",deviceID];
     
-    NSURLSessionDataTask *task = [self.manager GET:urlPath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager GET:urlPath success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
          if (completion)
          {
@@ -543,7 +545,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
     
-    NSURLSessionDataTask *task = [self.manager GET:@"/v1/devices" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager GET:@"/v1/devices" success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         
          if (completion)
@@ -653,7 +655,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     }
 
     NSString *urlPath = [NSString stringWithFormat:@"/v1/device_claims"];
-    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         if (completion)
         {
@@ -716,7 +718,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     
     NSString *urlPath = [NSString stringWithFormat:@"/v1/products/%tu/device_claims", productId];
     
-    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                   {
                                       if (completion)
                                       {
@@ -768,7 +770,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     NSString *urlPath = [NSString stringWithFormat:@"/v1/products/%tu/customers/reset_password", productId];
     
     
-    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
                                   {
                                       if (completion) // TODO: check responses
                                       {
@@ -810,7 +812,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     NSDictionary *params = @{@"username": email};
     NSString *urlPath = [NSString stringWithFormat:@"/v1/user/password-reset"];
     
-    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         if (completion) // TODO: check responses
         {
@@ -843,7 +845,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
 {
     [self.manager.requestSerializer setAuthorizationHeaderFieldWithUsername:user password:password];
     
-    NSURLSessionDataTask *task = [self.manager GET:@"/v1/access_tokens" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager GET:@"/v1/access_tokens" success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
 //        NSArray *responseArr = responseObject;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error)
@@ -1029,7 +1031,7 @@ static NSString *const kDefaultoAuthClientSecret = @"particle";
     params[@"private"] = isPrivate ? @"true" : @"false";
     params[@"ttl"] = [NSString stringWithFormat:@"%lu", (unsigned long)ttl];
     
-    NSURLSessionDataTask *task = [self.manager POST:@"/v1/devices/events" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
+    NSURLSessionDataTask *task = [self.manager POST:@"/v1/devices/events" parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         if (completion)
         {
